@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Phone, Mail, MapPin, Facebook, Star, ShieldCheck, BadgeCheck, Hammer,
-  Wrench, Layers, Boxes, Sparkles, ArrowRight, Menu, X, CheckCircle2, Quote,
+  Wrench, Layers, Boxes, Sparkles, ArrowRight, Menu, X, CheckCircle2, Quote, Flame,
 } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import hero from "@/assets/hero-modern.jpg";
