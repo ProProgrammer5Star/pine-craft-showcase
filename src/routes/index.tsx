@@ -49,7 +49,7 @@ const SERVICES = [
   { icon: Wrench, title: "Custom Carpentry", desc: "Trim, wainscoting, crown molding and slatwall accents that elevate any room." },
   { icon: Boxes, title: "Kitchen & Bath Remodels", desc: "Cabinets, vanities, niches and full renovations finished to a luxury standard." },
   { icon: Sparkles, title: "Repair & Refinishing", desc: "Restore tired floors and finish work to a like-new condition." },
-  { icon: Flame, title: "Firestone & Fire Pit Installation", desc: "Custom outdoor fire features built with natural stone and fire-safe materials for year-round gathering." },
+  { icon: Flame, title: "Fireplace & Fire Pit Installation", desc: "Custom indoor/outdoor fire features built with natural stone and fire-safe materials for year-round gathering." },
 ];
 
 const GALLERY = [
