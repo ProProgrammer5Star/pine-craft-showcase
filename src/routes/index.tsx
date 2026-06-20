@@ -50,6 +50,8 @@ const SERVICES = [
   { icon: Boxes, title: "Kitchen & Bath Remodels", desc: "Cabinets, vanities, niches and full renovations finished to a luxury standard." },
   { icon: Sparkles, title: "Repair & Refinishing", desc: "Restore tired floors and finish work to a like-new condition." },
   { icon: Flame, title: "Fireplace & Fire Pit Installation", desc: "Custom indoor/outdoor fire features built with natural stone and fire-safe materials for year-round gathering." },
+  { icon: Paintbrush, title: "Painting & Wall Finishes", desc: "Interior and exterior painting, staining, and specialty wall finishes that complete every remodel." },
+  { icon: Sun, title: "Decks & Outdoor Living", desc: "Custom decks, pergolas, and patio structures built to extend your living space into the Florida outdoors." },
 ];
 
 const GALLERY = [
