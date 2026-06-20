@@ -197,7 +197,7 @@ function Hero() {
 }
 
 function Marquee() {
-  const items = ["Hardwood", "Luxury Vinyl", "Tile & Stone", "Custom Carpentry", "Kitchen Remodels", "Bath Remodels", "Wainscoting", "Trim & Molding"];
+  const items = ["Hardwood", "Luxury Vinyl", "Tile & Stone", "Custom Carpentry", "Kitchen Remodels", "Bath Remodels", "Wainscoting", "Trim & Molding", "Fireplace & Fire Pit"];
   return (
     <div className="border-y border-border bg-[color:var(--sand)]/50">
       <div className="mx-auto max-w-7xl px-5 md:px-10 py-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs md:text-sm uppercase tracking-[0.2em] text-[color:var(--ink-soft)] font-medium">
