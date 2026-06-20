@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "EPS Flooring & Carpentry — Premium Remodeling in SW Florida" },
-      { name: "description", content: "Award-quality flooring installation, custom carpentry, and full remodeling by EPS in Sarasota, North Port, Englewood & Sarasota. Free estimates." },
+      { name: "description", content: "Award-quality flooring installation, custom carpentry, and full remodeling by EPS in Sarasota, North Port, Englewood, Venice & Fort Myers. Free estimates." },
       { property: "og:title", content: "EPS Flooring & Carpentry — Premium Remodeling in SW Florida" },
       { property: "og:description", content: "Hardwood, tile, custom carpentry and full remodels — crafted with precision in Southwest Florida." },
     ],
@@ -422,7 +422,7 @@ function Contact() {
               <div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--ink-soft)] font-semibold">Service Area</div>
                 <div className="font-semibold text-[color:var(--ink)]">Port Charlotte, FL</div>
-                <div className="text-sm text-[color:var(--ink-soft)] mt-1">Sarasota · North Port · Englewood · Sarasota</div>
+                <div className="text-sm text-[color:var(--ink-soft)] mt-1 leading-relaxed">Sarasota · North Port · Englewood<br />Venice · Fort Myers</div>
               </div>
             </div>
           </div>
