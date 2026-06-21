@@ -10,9 +10,9 @@ function findAsset(pattern) {
   return match ? `assets/${match}` : null;
 }
 
-const indexJs = findAsset(/^index-[A-Za-z0-9]+\.js$/);
-const routesJs = findAsset(/^routes-[A-Za-z0-9]+\.js$/);
-const stylesCss = findAsset(/^styles-[A-Za-z0-9]+\.css$/);
+const indexJs = findAsset(/^index-[A-Za-z0-9_]+\.js$/);
+const routesJs = findAsset(/^routes-[A-Za-z0-9_]+\.js$/);
+const stylesCss = findAsset(/^styles-[A-Za-z0-9_]+\.css$/);
 
 if (!indexJs || !stylesCss) {
   console.error("Could not find required build assets");
@@ -44,7 +44,6 @@ const html = `<!DOCTYPE html>
 <body>
   <div id="root"></div>
   <script type="module" src="/${indexJs}"></script>
-  ${routesJs ? `<script type="module" src="/${routesJs}"></script>` : ""}
 </body>
 </html>
 `;
