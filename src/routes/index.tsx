@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Phone, Mail, MapPin, Facebook, Star, ShieldCheck, BadgeCheck, Hammer,
@@ -19,17 +18,10 @@ import p6 from "@/assets/p6-bedroom-floor.jpg.asset.json";
 import p7 from "@/assets/p7-wainscot-bath.jpg.asset.json";
 import p8 from "@/assets/p8-wide-plank.jpg.asset.json";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "EPS Flooring & Carpentry — Premium Remodeling in SW Florida" },
-      { name: "description", content: "Award-quality flooring installation, custom carpentry, and full remodeling by EPS in Sarasota, North Port, Englewood, Venice & Fort Myers. Free estimates." },
-      { property: "og:title", content: "EPS Flooring & Carpentry — Premium Remodeling in SW Florida" },
-      { property: "og:description", content: "Hardwood, tile, custom carpentry and full remodels — crafted with precision in Southwest Florida." },
-    ],
-  }),
-  component: Home,
-});
+export default function Home() {
+  return <HomePage />;
+}
+
 
 const PHONE_DISPLAY = "(941) 301-9649";
 const PHONE_HREF = "tel:+19413019649";
