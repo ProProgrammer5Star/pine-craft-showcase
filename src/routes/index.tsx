@@ -18,9 +18,6 @@ import p6 from "@/assets/p6-bedroom-floor.jpg.asset.json";
 import p7 from "@/assets/p7-wainscot-bath.jpg.asset.json";
 import p8 from "@/assets/p8-wide-plank.jpg.asset.json";
 
-export default function Home() {
-  return <HomePage />;
-}
 
 
 const PHONE_DISPLAY = "(941) 301-9649";
