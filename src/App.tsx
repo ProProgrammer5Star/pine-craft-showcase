@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Phone, Mail, MapPin, Facebook, Star, ShieldCheck, BadgeCheck, Hammer,
   Wrench, Layers, Boxes, Sparkles, ArrowRight, Menu, X, CheckCircle2, Quote, Flame, Paintbrush, Sun,
+  ChevronLeft, ChevronRight,
 } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import hero from "@/assets/hero-modern.jpg";
@@ -9,14 +10,17 @@ import before1 from "@/assets/before1.jpg";
 import after1 from "@/assets/after1.jpg";
 import before2 from "@/assets/before2.jpg";
 import after2 from "@/assets/after2.jpg";
-import p1 from "@/assets/p1-kitchen-floor.jpg.asset.json";
-import p2 from "@/assets/p2-subway-bath.jpg.asset.json";
-import p3 from "@/assets/p3-kitchen-progress.jpg.asset.json";
-import p4 from "@/assets/p4-open-kitchen.jpg.asset.json";
-import p5 from "@/assets/p5-slat-island.jpg.asset.json";
-import p6 from "@/assets/p6-bedroom-floor.jpg.asset.json";
-import p7 from "@/assets/p7-wainscot-bath.jpg.asset.json";
 import p8 from "@/assets/p8-wide-plank.jpg.asset.json";
+import pj1_1 from "@/assets/projects/pj1.jpg.asset.json";
+import pj1_2 from "@/assets/projects/pj1_2.jpg.asset.json";
+import pj1_3 from "@/assets/projects/pj1_3.jpg.asset.json";
+import pj1_5 from "@/assets/projects/pj1_5.jpg.asset.json";
+import pj1_6 from "@/assets/projects/pj1_6.jpg.asset.json";
+import pj2_1 from "@/assets/projects/pj2.jpg.asset.json";
+import pj2_2 from "@/assets/projects/pj2_2.jpg.asset.json";
+import pj2_4 from "@/assets/projects/pj2_4.jpg.asset.json";
+import pj2_5 from "@/assets/projects/pj2_5.jpg.asset.json";
+import pj2_6 from "@/assets/projects/pj2_6.jpg.asset.json";
 
 
 
