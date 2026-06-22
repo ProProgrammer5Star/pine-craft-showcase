@@ -501,7 +501,7 @@ function Footer() {
           <div className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--wood)] font-semibold mb-5">Contact</div>
           <ul className="space-y-3 text-sm text-white/75">
             <li><a href={PHONE_HREF} className="hover:text-white transition">{PHONE_DISPLAY}</a></li>
-            <li><a href="mailto:info@epsflooring.com" className="hover:text-white transition">info@epsflooring.com</a></li>
+            <li><a href="mailto:epsgeneralcontractor1@gmail.com" className="hover:text-white transition">epsgeneralcontractor1@gmail.com</a></li>
             <li>Port Charlotte, FL</li>
           </ul>
         </div>
