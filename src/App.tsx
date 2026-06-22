@@ -47,15 +47,21 @@ const SERVICES = [
   { icon: Sun, title: "Decks & Outdoor Living", desc: "Custom decks, pergolas, and patio structures built to extend your living space into the Florida outdoors." },
 ];
 
-const GALLERY = [
-  { src: p8.url, label: "Wide-Plank Oak · Kitchen", span: "md:col-span-2 md:row-span-2" },
-  { src: p4.url, label: "Open Concept Living" },
-  { src: p2.url, label: "Subway Tile Shower" },
-  { src: p5.url, label: "Slat Wall Island" },
-  { src: p1.url, label: "Vinyl Plank Install" },
-  { src: p6.url, label: "Bedroom Flooring" },
-  { src: p7.url, label: "Wainscoting Detail" },
-  { src: p3.url, label: "Kitchen Remodel in Progress" },
+const PROJECTS = [
+  {
+    id: "pj1",
+    title: "Coastal Stacked-Stone Fireplace",
+    location: "Oceanfront Build · SWFL",
+    description: "Full two-sided fireplace build — from framing and cement board to natural stacked-stone cladding with a polished marble surround.",
+    photos: [pj1_1.url, pj1_2.url, pj1_3.url, pj1_5.url, pj1_6.url],
+  },
+  {
+    id: "pj2",
+    title: "Modern Electric Fireplace Wall",
+    location: "Living Room Remodel · SWFL",
+    description: "Transformed a dated stucco wall into a custom built-in entertainment center with linear electric fireplace, oak mantle, and lit display niches.",
+    photos: [pj2_1.url, pj2_2.url, pj2_4.url, pj2_5.url, pj2_6.url],
+  },
 ];
 
 const REVIEWS = [
