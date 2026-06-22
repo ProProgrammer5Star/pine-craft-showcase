@@ -401,7 +401,6 @@ function ProjectStack({ project, onOpen }: { project: typeof PROJECTS[number]; o
     </button>
   );
 }
-}
 
 function About() {
   return (
