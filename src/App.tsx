@@ -10,17 +10,17 @@ import before1 from "@/assets/before1.jpg";
 import after1 from "@/assets/after1.jpg";
 import before2 from "@/assets/before2.jpg";
 import after2 from "@/assets/after2.jpg";
-import p8 from "@/assets/p8-wide-plank.jpg.asset.json";
-import pj1_1 from "@/assets/projects/pj1.jpg.asset.json";
-import pj1_2 from "@/assets/projects/pj1_2.jpg.asset.json";
-import pj1_3 from "@/assets/projects/pj1_3.jpg.asset.json";
-import pj1_5 from "@/assets/projects/pj1_5.jpg.asset.json";
-import pj1_6 from "@/assets/projects/pj1_6.jpg.asset.json";
-import pj2_1 from "@/assets/projects/pj2.jpg.asset.json";
-import pj2_2 from "@/assets/projects/pj2_2.jpg.asset.json";
-import pj2_4 from "@/assets/projects/pj2_4.jpg.asset.json";
-import pj2_5 from "@/assets/projects/pj2_5.jpg.asset.json";
-import pj2_6 from "@/assets/projects/pj2_6.jpg.asset.json";
+import p8 from "@/assets/p8-wide-plank.jpg";
+import pj1_1 from "@/assets/projects/pj1.jpg";
+import pj1_2 from "@/assets/projects/pj1_2.jpg";
+import pj1_3 from "@/assets/projects/pj1_3.jpg";
+import pj1_5 from "@/assets/projects/pj1_5.jpg";
+import pj1_6 from "@/assets/projects/pj1_6.jpg";
+import pj2_1 from "@/assets/projects/pj2.jpg";
+import pj2_2 from "@/assets/projects/pj2_2.jpg";
+import pj2_4 from "@/assets/projects/pj2_4.jpg";
+import pj2_5 from "@/assets/projects/pj2_5.jpg";
+import pj2_6 from "@/assets/projects/pj2_6.jpg";
 
 
 
@@ -53,14 +53,14 @@ const PROJECTS = [
     title: "Coastal Stacked-Stone Fireplace",
     location: "Oceanfront Build · SWFL",
     description: "Full two-sided fireplace build — from framing and cement board to natural stacked-stone cladding with a polished marble surround.",
-    photos: [pj1_1.url, pj1_2.url, pj1_3.url, pj1_5.url, pj1_6.url],
+    photos: [pj1_1, pj1_2, pj1_3, pj1_5, pj1_6],
   },
   {
     id: "pj2",
     title: "Modern Electric Fireplace Wall",
     location: "Living Room Remodel · SWFL",
     description: "Transformed a dated stucco wall into a custom built-in entertainment center with linear electric fireplace, oak mantle, and lit display niches.",
-    photos: [pj2_1.url, pj2_2.url, pj2_4.url, pj2_5.url, pj2_6.url],
+    photos: [pj2_1, pj2_2, pj2_4, pj2_5, pj2_6],
   },
 ];
 
@@ -408,7 +408,7 @@ function About() {
       <div className="mx-auto max-w-7xl px-5 md:px-10 grid lg:grid-cols-2 gap-14 md:gap-20 items-center">
         <div className="relative order-2 lg:order-1">
           <div className="rounded-3xl overflow-hidden shadow-[var(--shadow-lift)]">
-            <img src={p8.url} alt="Wide plank oak floor by EPS" className="w-full h-full object-cover aspect-[4/5]" loading="lazy" />
+            <img src={p8} alt="Wide plank oak floor by EPS" className="w-full h-full object-cover aspect-[4/5]" loading="lazy" />
           </div>
           <div className="absolute -bottom-6 -right-6 hidden md:block bg-[color:var(--ink)] text-[color:var(--ivory)] rounded-2xl p-7 shadow-[var(--shadow-lift)] max-w-xs">
             <Quote className="h-6 w-6 text-[color:var(--wood)]" />
