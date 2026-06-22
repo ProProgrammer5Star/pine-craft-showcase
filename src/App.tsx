@@ -10,17 +10,17 @@ import before1 from "@/assets/before1.jpg";
 import after1 from "@/assets/after1.jpg";
 import before2 from "@/assets/before2.jpg";
 import after2 from "@/assets/after2.jpg";
-import p8 from "@/assets/p8-wide-plank.jpg.asset.json";
-import pj1_1 from "@/assets/projects/pj1.jpg.asset.json";
-import pj1_2 from "@/assets/projects/pj1_2.jpg.asset.json";
-import pj1_3 from "@/assets/projects/pj1_3.jpg.asset.json";
-import pj1_5 from "@/assets/projects/pj1_5.jpg.asset.json";
-import pj1_6 from "@/assets/projects/pj1_6.jpg.asset.json";
-import pj2_1 from "@/assets/projects/pj2.jpg.asset.json";
-import pj2_2 from "@/assets/projects/pj2_2.jpg.asset.json";
-import pj2_4 from "@/assets/projects/pj2_4.jpg.asset.json";
-import pj2_5 from "@/assets/projects/pj2_5.jpg.asset.json";
-import pj2_6 from "@/assets/projects/pj2_6.jpg.asset.json";
+import p8 from "@/assets/p8-wide-plank.jpg";
+import pj1_1 from "@/assets/projects/pj1.jpg";
+import pj1_2 from "@/assets/projects/pj1_2.jpg";
+import pj1_3 from "@/assets/projects/pj1_3.jpg";
+import pj1_5 from "@/assets/projects/pj1_5.jpg";
+import pj1_6 from "@/assets/projects/pj1_6.jpg";
+import pj2_1 from "@/assets/projects/pj2.jpg";
+import pj2_2 from "@/assets/projects/pj2_2.jpg";
+import pj2_4 from "@/assets/projects/pj2_4.jpg";
+import pj2_5 from "@/assets/projects/pj2_5.jpg";
+import pj2_6 from "@/assets/projects/pj2_6.jpg";
 
 
 
