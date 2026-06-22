@@ -408,7 +408,7 @@ function About() {
       <div className="mx-auto max-w-7xl px-5 md:px-10 grid lg:grid-cols-2 gap-14 md:gap-20 items-center">
         <div className="relative order-2 lg:order-1">
           <div className="rounded-3xl overflow-hidden shadow-[var(--shadow-lift)]">
-            <img src={p8.url} alt="Wide plank oak floor by EPS" className="w-full h-full object-cover aspect-[4/5]" loading="lazy" />
+            <img src={p8} alt="Wide plank oak floor by EPS" className="w-full h-full object-cover aspect-[4/5]" loading="lazy" />
           </div>
           <div className="absolute -bottom-6 -right-6 hidden md:block bg-[color:var(--ink)] text-[color:var(--ivory)] rounded-2xl p-7 shadow-[var(--shadow-lift)] max-w-xs">
             <Quote className="h-6 w-6 text-[color:var(--wood)]" />
