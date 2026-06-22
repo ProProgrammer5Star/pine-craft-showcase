@@ -53,7 +53,7 @@ const PROJECTS = [
     title: "Coastal Stacked-Stone Fireplace",
     location: "Oceanfront Build · SWFL",
     description: "Full two-sided fireplace build — from framing and cement board to natural stacked-stone cladding with a polished marble surround.",
-    photos: [pj1_1.url, pj1_2.url, pj1_3.url, pj1_5.url, pj1_6.url],
+    photos: [pj1_1, pj1_2, pj1_3, pj1_5, pj1_6],
   },
   {
     id: "pj2",
