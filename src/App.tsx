@@ -60,7 +60,7 @@ const PROJECTS = [
     title: "Modern Electric Fireplace Wall",
     location: "Living Room Remodel · SWFL",
     description: "Transformed a dated stucco wall into a custom built-in entertainment center with linear electric fireplace, oak mantle, and lit display niches.",
-    photos: [pj2_1.url, pj2_2.url, pj2_4.url, pj2_5.url, pj2_6.url],
+    photos: [pj2_1, pj2_2, pj2_4, pj2_5, pj2_6],
   },
 ];
 
