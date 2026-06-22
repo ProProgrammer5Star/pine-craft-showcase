@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Phone, Mail, MapPin, Facebook, Star, ShieldCheck, BadgeCheck, Hammer,
   Wrench, Layers, Boxes, Sparkles, ArrowRight, Menu, X, CheckCircle2, Quote, Flame, Paintbrush, Sun,
+  ChevronLeft, ChevronRight,
 } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import hero from "@/assets/hero-modern.jpg";
@@ -9,14 +10,17 @@ import before1 from "@/assets/before1.jpg";
 import after1 from "@/assets/after1.jpg";
 import before2 from "@/assets/before2.jpg";
 import after2 from "@/assets/after2.jpg";
-import p1 from "@/assets/p1-kitchen-floor.jpg.asset.json";
-import p2 from "@/assets/p2-subway-bath.jpg.asset.json";
-import p3 from "@/assets/p3-kitchen-progress.jpg.asset.json";
-import p4 from "@/assets/p4-open-kitchen.jpg.asset.json";
-import p5 from "@/assets/p5-slat-island.jpg.asset.json";
-import p6 from "@/assets/p6-bedroom-floor.jpg.asset.json";
-import p7 from "@/assets/p7-wainscot-bath.jpg.asset.json";
 import p8 from "@/assets/p8-wide-plank.jpg.asset.json";
+import pj1_1 from "@/assets/projects/pj1.jpg.asset.json";
+import pj1_2 from "@/assets/projects/pj1_2.jpg.asset.json";
+import pj1_3 from "@/assets/projects/pj1_3.jpg.asset.json";
+import pj1_5 from "@/assets/projects/pj1_5.jpg.asset.json";
+import pj1_6 from "@/assets/projects/pj1_6.jpg.asset.json";
+import pj2_1 from "@/assets/projects/pj2.jpg.asset.json";
+import pj2_2 from "@/assets/projects/pj2_2.jpg.asset.json";
+import pj2_4 from "@/assets/projects/pj2_4.jpg.asset.json";
+import pj2_5 from "@/assets/projects/pj2_5.jpg.asset.json";
+import pj2_6 from "@/assets/projects/pj2_6.jpg.asset.json";
 
 
 
@@ -43,15 +47,21 @@ const SERVICES = [
   { icon: Sun, title: "Decks & Outdoor Living", desc: "Custom decks, pergolas, and patio structures built to extend your living space into the Florida outdoors." },
 ];
 
-const GALLERY = [
-  { src: p8.url, label: "Wide-Plank Oak · Kitchen", span: "md:col-span-2 md:row-span-2" },
-  { src: p4.url, label: "Open Concept Living" },
-  { src: p2.url, label: "Subway Tile Shower" },
-  { src: p5.url, label: "Slat Wall Island" },
-  { src: p1.url, label: "Vinyl Plank Install" },
-  { src: p6.url, label: "Bedroom Flooring" },
-  { src: p7.url, label: "Wainscoting Detail" },
-  { src: p3.url, label: "Kitchen Remodel in Progress" },
+const PROJECTS = [
+  {
+    id: "pj1",
+    title: "Coastal Stacked-Stone Fireplace",
+    location: "Oceanfront Build · SWFL",
+    description: "Full two-sided fireplace build — from framing and cement board to natural stacked-stone cladding with a polished marble surround.",
+    photos: [pj1_1.url, pj1_2.url, pj1_3.url, pj1_5.url, pj1_6.url],
+  },
+  {
+    id: "pj2",
+    title: "Modern Electric Fireplace Wall",
+    location: "Living Room Remodel · SWFL",
+    description: "Transformed a dated stucco wall into a custom built-in entertainment center with linear electric fireplace, oak mantle, and lit display niches.",
+    photos: [pj2_1.url, pj2_2.url, pj2_4.url, pj2_5.url, pj2_6.url],
+  },
 ];
 
 const REVIEWS = [
@@ -257,6 +267,26 @@ function BeforeAfter({ before, after, label }: { before: string; after: string; 
 }
 
 function Work() {
+  const [activeProject, setActiveProject] = useState<number | null>(null);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  const openProject = (i: number) => { setActiveProject(i); setPhotoIndex(0); };
+  const close = () => setActiveProject(null);
+
+  const current = activeProject !== null ? PROJECTS[activeProject] : null;
+
+  useEffect(() => {
+    if (activeProject === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      if (current && e.key === "ArrowRight") setPhotoIndex((i) => (i + 1) % current.photos.length);
+      if (current && e.key === "ArrowLeft") setPhotoIndex((i) => (i - 1 + current.photos.length) % current.photos.length);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [activeProject, current]);
+
   return (
     <section id="work" className="py-24 md:py-36 bg-[color:var(--sand)]/40">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
@@ -267,26 +297,108 @@ function Work() {
           <BeforeAfter before={before2} after={after2} label="Coastal Fireplace Build · Sarasota" />
         </div>
 
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex items-end justify-between mb-10">
           <h3 className="font-display text-3xl md:text-4xl text-[color:var(--ink)]">Project Gallery</h3>
           <a href="#contact" className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--ink)] hover:text-[color:var(--wood-dark)] transition">
             Start your project <ArrowRight className="h-4 w-4" />
           </a>
         </div>
+        <p className="text-sm text-[color:var(--ink-soft)] mb-8 -mt-6">Click a stack to view the full project.</p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[240px] gap-3 md:gap-4">
-          {GALLERY.map((g) => (
-            <figure key={g.label} className={`group relative overflow-hidden rounded-2xl bg-muted ${g.span ?? ""}`}>
-              <img src={g.src} alt={g.label} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <figcaption className="absolute bottom-3 left-4 right-4 text-[color:var(--ivory)] text-xs md:text-sm font-medium tracking-wide opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition">
-                {g.label}
-              </figcaption>
-            </figure>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 pt-4">
+          {PROJECTS.map((p, i) => (
+            <ProjectStack key={p.id} project={p} onOpen={() => openProject(i)} />
           ))}
         </div>
       </div>
+
+      {current && (
+        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8" onClick={close}>
+          <button
+            onClick={(e) => { e.stopPropagation(); close(); }}
+            className="absolute top-4 right-4 md:top-6 md:right-6 h-11 w-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); setPhotoIndex((i) => (i - 1 + current.photos.length) % current.photos.length); }}
+            className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); setPhotoIndex((i) => (i + 1) % current.photos.length); }}
+            className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+            aria-label="Next"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+
+          <div className="max-w-5xl w-full flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
+            <div className="w-full max-h-[75vh] flex items-center justify-center">
+              <img src={current.photos[photoIndex]} alt={`${current.title} ${photoIndex + 1}`} className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg shadow-2xl" />
+            </div>
+            <div className="text-center text-white">
+              <div className="text-xs uppercase tracking-[0.25em] text-white/60">{current.location}</div>
+              <h4 className="font-display text-xl md:text-2xl mt-1">{current.title}</h4>
+              <div className="text-sm text-white/70 mt-2">{photoIndex + 1} / {current.photos.length}</div>
+            </div>
+            <div className="flex gap-2 flex-wrap justify-center">
+              {current.photos.map((src, i) => (
+                <button
+                  key={src}
+                  onClick={() => setPhotoIndex(i)}
+                  className={`h-14 w-14 md:h-16 md:w-16 rounded-md overflow-hidden ring-2 transition ${i === photoIndex ? "ring-white" : "ring-transparent opacity-60 hover:opacity-100"}`}
+                >
+                  <img src={src} alt="" className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
+  );
+}
+
+function ProjectStack({ project, onOpen }: { project: typeof PROJECTS[number]; onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className="group text-left focus:outline-none"
+      aria-label={`Open ${project.title} project gallery`}
+    >
+      <div className="relative h-[360px] md:h-[460px] mb-6">
+        {/* Back card */}
+        <div className="absolute inset-0 rounded-2xl bg-[color:var(--sand)] shadow-lg rotate-[-4deg] translate-x-3 translate-y-3 transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:translate-x-5 group-hover:translate-y-5 overflow-hidden">
+          <img src={project.photos[2] ?? project.photos[0]} alt="" className="w-full h-full object-cover opacity-80" />
+        </div>
+        {/* Middle card */}
+        <div className="absolute inset-0 rounded-2xl bg-white shadow-xl rotate-[3deg] translate-x-1 translate-y-1 transition-transform duration-500 group-hover:rotate-[5deg] group-hover:translate-x-2 group-hover:translate-y-2 overflow-hidden">
+          <img src={project.photos[1] ?? project.photos[0]} alt="" className="w-full h-full object-cover opacity-90" />
+        </div>
+        {/* Front card */}
+        <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5 transition-transform duration-500 group-hover:-translate-y-2">
+          <img src={project.photos[0]} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute top-4 right-4 bg-white/95 text-[color:var(--ink)] text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+            {project.photos.length} photos
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 text-white">
+            <div className="text-[11px] uppercase tracking-[0.25em] text-white/80">{project.location}</div>
+            <div className="font-display text-xl md:text-2xl mt-1">{project.title}</div>
+            <div className="mt-3 inline-flex items-center gap-2 text-sm font-semibold opacity-90 group-hover:opacity-100">
+              View project <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <p className="text-sm md:text-base text-[color:var(--ink-soft)] leading-relaxed">{project.description}</p>
+    </button>
   );
 }
 
