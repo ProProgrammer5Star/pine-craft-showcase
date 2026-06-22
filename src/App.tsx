@@ -514,11 +514,11 @@ function Contact() {
                 <div className="font-semibold text-[color:var(--ink)]">{PHONE_DISPLAY}</div>
               </div>
             </a>
-            <a href="mailto:info@epsflooring.com" className="flex items-center gap-4 rounded-2xl bg-card border border-border p-5 hover:border-[color:var(--ink)] transition">
+            <a href="mailto:epsgeneralcontractor1@gmail.com" className="flex items-center gap-4 rounded-2xl bg-card border border-border p-5 hover:border-[color:var(--ink)] transition">
               <div className="h-11 w-11 rounded-full bg-[color:var(--wood-dark)] text-white flex items-center justify-center"><Mail className="h-4 w-4" /></div>
               <div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--ink-soft)] font-semibold">Email</div>
-                <div className="font-semibold text-[color:var(--ink)]">info@epsflooring.com</div>
+                <div className="font-semibold text-[color:var(--ink)]">epsgeneralcontractor1@gmail.com</div>
               </div>
             </a>
             <div className="flex items-start gap-4 rounded-2xl bg-card border border-border p-5">
