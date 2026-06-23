@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   Phone, Mail, MapPin, Facebook, Star, ShieldCheck, BadgeCheck, Hammer,
   Wrench, Layers, Boxes, Sparkles, ArrowRight, Menu, X, CheckCircle2, Quote, Flame, Paintbrush, Sun,
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, Loader2,
 } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import hero from "@/assets/hero-modern.jpg";
@@ -21,11 +21,22 @@ import pj2_2 from "@/assets/projects/pj2_2.jpg";
 import pj2_4 from "@/assets/projects/pj2_4.jpg";
 import pj2_5 from "@/assets/projects/pj2_5.jpg";
 import pj2_6 from "@/assets/projects/pj2_6.jpg";
-
-
+import g1 from "@/assets/gallery/new_1.jpg";
+import g2 from "@/assets/gallery/new_2.jpg";
+import g3 from "@/assets/gallery/new_3.jpg";
+import g4 from "@/assets/gallery/new_4.jpg";
+import g5 from "@/assets/gallery/new_5.jpg";
+import g6 from "@/assets/gallery/new_6.jpg";
+import g7 from "@/assets/gallery/new_7.jpg";
+import g8 from "@/assets/gallery/new_8.jpg";
+import g9 from "@/assets/gallery/new_9.jpg";
+import g10 from "@/assets/gallery/new_10.jpg";
 
 const PHONE_DISPLAY = "(941) 301-9649";
 const PHONE_HREF = "tel:+19413019649";
+const FACEBOOK_URL = "https://www.facebook.com/eps.general.contractor.llc";
+const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/fzPMFLi8xhgMtBPy6";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/maqgnwqv";
 
 const NAV = [
   { href: "#services", label: "Services" },
@@ -47,21 +58,27 @@ const SERVICES = [
   { icon: Sun, title: "Decks & Outdoor Living", desc: "Custom decks, pergolas, and patio structures built to extend your living space into the Florida outdoors." },
 ];
 
-const PROJECTS = [
-  {
-    id: "pj1",
-    title: "Coastal Stacked-Stone Fireplace",
-    location: "Oceanfront Build · SWFL",
-    description: "Full two-sided fireplace build — from framing and cement board to natural stacked-stone cladding with a polished marble surround.",
-    photos: [pj1_1, pj1_2, pj1_3, pj1_5, pj1_6],
-  },
-  {
-    id: "pj2",
-    title: "Modern Electric Fireplace Wall",
-    location: "Living Room Remodel · SWFL",
-    description: "Transformed a dated stucco wall into a custom built-in entertainment center with linear electric fireplace, oak mantle, and lit display niches.",
-    photos: [pj2_1, pj2_2, pj2_4, pj2_5, pj2_6],
-  },
+const GALLERY: { src: string; alt: string }[] = [
+  { src: pj1_1, alt: "Coastal stacked-stone fireplace build" },
+  { src: pj2_1, alt: "Modern electric fireplace wall" },
+  { src: g1, alt: "Luxury vinyl plank install in bedroom" },
+  { src: g5, alt: "Custom white shaker kitchen with quartz island" },
+  { src: pj1_2, alt: "Stacked stone fireplace surround in progress" },
+  { src: g2, alt: "Natural stone fireplace feature wall" },
+  { src: pj2_2, alt: "Built-in entertainment center with linear fireplace" },
+  { src: g3, alt: "Wide plank flooring in open living room" },
+  { src: g6, alt: "White shaker cabinetry detail" },
+  { src: pj1_3, alt: "Fireplace cladding detail" },
+  { src: g4, alt: "Penny tile bathroom floor install" },
+  { src: g8, alt: "Ash plank hardwood floor install" },
+  { src: pj2_4, alt: "Oak mantle and lit display niches" },
+  { src: g9, alt: "Light oak luxury vinyl plank kitchen floor" },
+  { src: pj1_5, alt: "Marble fireplace surround detail" },
+  { src: g7, alt: "Shaker interior doors install" },
+  { src: pj2_5, alt: "Custom built-in shelving" },
+  { src: g10, alt: "Slatted kitchen island with new flooring" },
+  { src: pj1_6, alt: "Finished coastal stacked-stone fireplace" },
+  { src: pj2_6, alt: "Modern fireplace wall finished" },
 ];
 
 const REVIEWS = [
