@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   Phone, Mail, MapPin, Facebook, Star, ShieldCheck, BadgeCheck, Hammer,
   Wrench, Layers, Boxes, Sparkles, ArrowRight, Menu, X, CheckCircle2, Quote, Flame, Paintbrush, Sun,
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, Loader2,
 } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import hero from "@/assets/hero-modern.jpg";
@@ -21,11 +21,22 @@ import pj2_2 from "@/assets/projects/pj2_2.jpg";
 import pj2_4 from "@/assets/projects/pj2_4.jpg";
 import pj2_5 from "@/assets/projects/pj2_5.jpg";
 import pj2_6 from "@/assets/projects/pj2_6.jpg";
-
-
+import g1 from "@/assets/gallery/new_1.jpg";
+import g2 from "@/assets/gallery/new_2.jpg";
+import g3 from "@/assets/gallery/new_3.jpg";
+import g4 from "@/assets/gallery/new_4.jpg";
+import g5 from "@/assets/gallery/new_5.jpg";
+import g6 from "@/assets/gallery/new_6.jpg";
+import g7 from "@/assets/gallery/new_7.jpg";
+import g8 from "@/assets/gallery/new_8.jpg";
+import g9 from "@/assets/gallery/new_9.jpg";
+import g10 from "@/assets/gallery/new_10.jpg";
 
 const PHONE_DISPLAY = "(941) 301-9649";
 const PHONE_HREF = "tel:+19413019649";
+const FACEBOOK_URL = "https://www.facebook.com/eps.general.contractor.llc";
+const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/fzPMFLi8xhgMtBPy6";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/maqgnwqv";
 
 const NAV = [
   { href: "#services", label: "Services" },
@@ -47,21 +58,27 @@ const SERVICES = [
   { icon: Sun, title: "Decks & Outdoor Living", desc: "Custom decks, pergolas, and patio structures built to extend your living space into the Florida outdoors." },
 ];
 
-const PROJECTS = [
-  {
-    id: "pj1",
-    title: "Coastal Stacked-Stone Fireplace",
-    location: "Oceanfront Build · SWFL",
-    description: "Full two-sided fireplace build — from framing and cement board to natural stacked-stone cladding with a polished marble surround.",
-    photos: [pj1_1, pj1_2, pj1_3, pj1_5, pj1_6],
-  },
-  {
-    id: "pj2",
-    title: "Modern Electric Fireplace Wall",
-    location: "Living Room Remodel · SWFL",
-    description: "Transformed a dated stucco wall into a custom built-in entertainment center with linear electric fireplace, oak mantle, and lit display niches.",
-    photos: [pj2_1, pj2_2, pj2_4, pj2_5, pj2_6],
-  },
+const GALLERY: { src: string; alt: string }[] = [
+  { src: pj1_1, alt: "Coastal stacked-stone fireplace build" },
+  { src: pj2_1, alt: "Modern electric fireplace wall" },
+  { src: g1, alt: "Luxury vinyl plank install in bedroom" },
+  { src: g5, alt: "Custom white shaker kitchen with quartz island" },
+  { src: pj1_2, alt: "Stacked stone fireplace surround in progress" },
+  { src: g2, alt: "Natural stone fireplace feature wall" },
+  { src: pj2_2, alt: "Built-in entertainment center with linear fireplace" },
+  { src: g3, alt: "Wide plank flooring in open living room" },
+  { src: g6, alt: "White shaker cabinetry detail" },
+  { src: pj1_3, alt: "Fireplace cladding detail" },
+  { src: g4, alt: "Penny tile bathroom floor install" },
+  { src: g8, alt: "Ash plank hardwood floor install" },
+  { src: pj2_4, alt: "Oak mantle and lit display niches" },
+  { src: g9, alt: "Light oak luxury vinyl plank kitchen floor" },
+  { src: pj1_5, alt: "Marble fireplace surround detail" },
+  { src: g7, alt: "Shaker interior doors install" },
+  { src: pj2_5, alt: "Custom built-in shelving" },
+  { src: g10, alt: "Slatted kitchen island with new flooring" },
+  { src: pj1_6, alt: "Finished coastal stacked-stone fireplace" },
+  { src: pj2_6, alt: "Modern fireplace wall finished" },
 ];
 
 const REVIEWS = [
@@ -169,14 +186,40 @@ function Hero() {
           <p className="mt-7 text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed animate-fade-up-delay-2">
             Premium flooring, custom carpentry, and full kitchen & bath remodels — installed with uncompromising precision across Southwest Florida.
           </p>
-          <div className="mt-10 flex flex-wrap gap-3 animate-fade-up-delay-3">
+          <div className="mt-10 flex flex-wrap items-center gap-3 animate-fade-up-delay-3">
             <a href="#contact" className="inline-flex items-center gap-2 rounded-full bg-[color:var(--ivory)] hover:bg-white text-[color:var(--ink)] px-7 py-4 text-sm font-semibold shadow-[var(--shadow-lift)] transition">
               Get a Free Estimate <ArrowRight className="h-4 w-4" />
             </a>
             <a href={PHONE_HREF} className="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white px-7 py-4 text-sm font-semibold backdrop-blur transition">
               <Phone className="h-4 w-4" /> Call {PHONE_DISPLAY}
             </a>
+            <div className="flex items-center gap-2 sm:ml-2">
+              <a
+                href={FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit our Facebook page"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white backdrop-blur transition-transform duration-300 hover:-translate-y-0.5 hover:scale-105"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Read our Google reviews"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white backdrop-blur transition-transform duration-300 hover:-translate-y-0.5 hover:scale-105"
+              >
+                <svg viewBox="0 0 48 48" className="h-5 w-5" aria-hidden="true">
+                  <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/>
+                  <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                  <path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 14-5.4l-6.5-5.5C29.6 34.6 26.9 35.5 24 35.5c-5.3 0-9.7-3.4-11.3-8l-6.5 5C9.6 39.6 16.2 44 24 44z"/>
+                  <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.5 5.5C41.9 35.5 44 30.1 44 24c0-1.3-.1-2.4-.4-3.5z"/>
+                </svg>
+              </a>
+            </div>
           </div>
+
           <div className="mt-14 grid grid-cols-3 gap-6 max-w-xl animate-fade-up-delay-3">
             {[
               { k: "15+", v: "Years of Craft" },
@@ -267,25 +310,25 @@ function BeforeAfter({ before, after, label }: { before: string; after: string; 
 }
 
 function Work() {
-  const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [photoIndex, setPhotoIndex] = useState(0);
-
-  const openProject = (i: number) => { setActiveProject(i); setPhotoIndex(0); };
-  const close = () => setActiveProject(null);
-
-  const current = activeProject !== null ? PROJECTS[activeProject] : null;
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const open = (i: number) => setLightboxIndex(i);
+  const close = () => setLightboxIndex(null);
+  const next = () => setLightboxIndex((i) => (i === null ? i : (i + 1) % GALLERY.length));
+  const prev = () => setLightboxIndex((i) => (i === null ? i : (i - 1 + GALLERY.length) % GALLERY.length));
 
   useEffect(() => {
-    if (activeProject === null) return;
+    if (lightboxIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
-      if (current && e.key === "ArrowRight") setPhotoIndex((i) => (i + 1) % current.photos.length);
-      if (current && e.key === "ArrowLeft") setPhotoIndex((i) => (i - 1 + current.photos.length) % current.photos.length);
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [activeProject, current]);
+  }, [lightboxIndex]);
+
+  const current = lightboxIndex !== null ? GALLERY[lightboxIndex] : null;
 
   return (
     <section id="work" className="py-24 md:py-36 bg-[color:var(--sand)]/40">
@@ -297,23 +340,41 @@ function Work() {
           <BeforeAfter before={before2} after={after2} label="Coastal Fireplace Build · Sarasota" />
         </div>
 
-        <div className="flex items-end justify-between mb-10">
+        <div className="flex items-end justify-between mb-4">
           <h3 className="font-display text-3xl md:text-4xl text-[color:var(--ink)]">Project Gallery</h3>
           <a href="#contact" className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--ink)] hover:text-[color:var(--wood-dark)] transition">
             Start your project <ArrowRight className="h-4 w-4" />
           </a>
         </div>
-        <p className="text-sm text-[color:var(--ink-soft)] mb-8 -mt-6">Click a stack to view the full project.</p>
+        <p className="text-sm text-[color:var(--ink-soft)] mb-10">Click any photo to view full-screen.</p>
 
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 pt-4">
-          {PROJECTS.map((p, i) => (
-            <ProjectStack key={p.id} project={p} onOpen={() => openProject(i)} />
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 md:gap-5 [column-fill:_balance]">
+          {GALLERY.map((g, i) => (
+            <button
+              key={g.src}
+              type="button"
+              onClick={() => open(i)}
+              className="group relative mb-4 md:mb-5 block w-full overflow-hidden rounded-2xl shadow-[var(--shadow-soft)] ring-1 ring-black/5 break-inside-avoid focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ink)]"
+              aria-label={`Open photo ${i + 1}: ${g.alt}`}
+            >
+              <img
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto object-cover transition-transform duration-[700ms] ease-out group-hover:scale-[1.04]"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4 text-white translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-300">
+                <div className="text-xs font-medium leading-snug line-clamp-2">{g.alt}</div>
+              </div>
+            </button>
           ))}
         </div>
       </div>
 
-      {current && (
-        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8" onClick={close}>
+      {current && lightboxIndex !== null && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-8 animate-fade-in" onClick={close}>
           <button
             onClick={(e) => { e.stopPropagation(); close(); }}
             className="absolute top-4 right-4 md:top-6 md:right-6 h-11 w-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
@@ -321,41 +382,32 @@ function Work() {
           >
             <X className="h-5 w-5" />
           </button>
-
           <button
-            onClick={(e) => { e.stopPropagation(); setPhotoIndex((i) => (i - 1 + current.photos.length) % current.photos.length); }}
+            onClick={(e) => { e.stopPropagation(); prev(); }}
             className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
             aria-label="Previous"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
-            onClick={(e) => { e.stopPropagation(); setPhotoIndex((i) => (i + 1) % current.photos.length); }}
+            onClick={(e) => { e.stopPropagation(); next(); }}
             className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
             aria-label="Next"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
 
-          <div className="max-w-5xl w-full flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
-            <div className="w-full max-h-[75vh] flex items-center justify-center">
-              <img src={current.photos[photoIndex]} alt={`${current.title} ${photoIndex + 1}`} className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg shadow-2xl" />
+          <div className="max-w-6xl w-full flex flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>
+            <div className="w-full max-h-[82vh] flex items-center justify-center">
+              <img
+                src={current.src}
+                alt={current.alt}
+                className="max-h-[82vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
+              />
             </div>
             <div className="text-center text-white">
-              <div className="text-xs uppercase tracking-[0.25em] text-white/60">{current.location}</div>
-              <h4 className="font-display text-xl md:text-2xl mt-1">{current.title}</h4>
-              <div className="text-sm text-white/70 mt-2">{photoIndex + 1} / {current.photos.length}</div>
-            </div>
-            <div className="flex gap-2 flex-wrap justify-center">
-              {current.photos.map((src, i) => (
-                <button
-                  key={src}
-                  onClick={() => setPhotoIndex(i)}
-                  className={`h-14 w-14 md:h-16 md:w-16 rounded-md overflow-hidden ring-2 transition ${i === photoIndex ? "ring-white" : "ring-transparent opacity-60 hover:opacity-100"}`}
-                >
-                  <img src={src} alt="" className="h-full w-full object-cover" />
-                </button>
-              ))}
+              <div className="text-sm text-white/85">{current.alt}</div>
+              <div className="text-xs text-white/55 mt-1">{lightboxIndex + 1} / {GALLERY.length}</div>
             </div>
           </div>
         </div>
@@ -364,43 +416,6 @@ function Work() {
   );
 }
 
-function ProjectStack({ project, onOpen }: { project: typeof PROJECTS[number]; onOpen: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="group text-left focus:outline-none"
-      aria-label={`Open ${project.title} project gallery`}
-    >
-      <div className="relative h-[360px] md:h-[460px] mb-6">
-        {/* Back card */}
-        <div className="absolute inset-0 rounded-2xl bg-[color:var(--sand)] shadow-lg rotate-[-4deg] translate-x-3 translate-y-3 transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:translate-x-5 group-hover:translate-y-5 overflow-hidden">
-          <img src={project.photos[2] ?? project.photos[0]} alt="" className="w-full h-full object-cover opacity-80" />
-        </div>
-        {/* Middle card */}
-        <div className="absolute inset-0 rounded-2xl bg-white shadow-xl rotate-[3deg] translate-x-1 translate-y-1 transition-transform duration-500 group-hover:rotate-[5deg] group-hover:translate-x-2 group-hover:translate-y-2 overflow-hidden">
-          <img src={project.photos[1] ?? project.photos[0]} alt="" className="w-full h-full object-cover opacity-90" />
-        </div>
-        {/* Front card */}
-        <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5 transition-transform duration-500 group-hover:-translate-y-2">
-          <img src={project.photos[0]} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          <div className="absolute top-4 right-4 bg-white/95 text-[color:var(--ink)] text-xs font-semibold px-3 py-1.5 rounded-full shadow">
-            {project.photos.length} photos
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 text-white">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-white/80">{project.location}</div>
-            <div className="font-display text-xl md:text-2xl mt-1">{project.title}</div>
-            <div className="mt-3 inline-flex items-center gap-2 text-sm font-semibold opacity-90 group-hover:opacity-100">
-              View project <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <p className="text-sm md:text-base text-[color:var(--ink-soft)] leading-relaxed">{project.description}</p>
-    </button>
-  );
-}
 
 function About() {
   return (
@@ -500,8 +515,41 @@ function CtaBand() {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    setStatus("submitting");
+    setErrorMsg("");
+    try {
+      const data = new FormData(form);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        const json = await res.json().catch(() => null);
+        setErrorMsg(json?.errors?.[0]?.message || "Something went wrong. Please try again or call us directly.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+      setStatus("error");
+    }
+  };
+
   return (
+
     <section id="contact" className="py-24 md:py-36 bg-[color:var(--sand)]/40">
       <div className="mx-auto max-w-7xl px-5 md:px-10 grid lg:grid-cols-5 gap-12">
         <div className="lg:col-span-2">
@@ -533,20 +581,11 @@ function Contact() {
         </div>
         <div className="lg:col-span-3">
           <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            onSubmit={(e) => {
-              if (!window.location.hostname.includes("netlify")) {
-                e.preventDefault();
-                setSent(true);
-              }
-            }}
+            onSubmit={handleSubmit}
+            noValidate
             className="rounded-3xl bg-card border border-border p-7 md:p-12 shadow-[var(--shadow-soft)]"
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <p className="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+            <p className="hidden" aria-hidden="true"><label>Don't fill this out: <input name="_gotcha" tabIndex={-1} autoComplete="off" /></label></p>
             <div className="grid md:grid-cols-2 gap-5">
               <Field label="Name" name="name" required />
               <Field label="Phone" name="phone" type="tel" required />
@@ -564,12 +603,34 @@ function Contact() {
                 <textarea name="message" rows={5} required className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-[color:var(--ink)] focus:border-[color:var(--ink)]" />
               </div>
             </div>
-            <button type="submit" className="mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] hover:bg-[color:var(--ink-soft)] text-[color:var(--ivory)] px-8 py-4 text-sm font-semibold transition">
-              Send Request <ArrowRight className="h-4 w-4" />
+            <button
+              type="submit"
+              disabled={status === "submitting" || status === "success"}
+              className="mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] hover:bg-[color:var(--ink-soft)] text-[color:var(--ivory)] px-8 py-4 text-sm font-semibold transition disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {status === "submitting" ? (<><Loader2 className="h-4 w-4 animate-spin" /> Sending…</>) : status === "success" ? (<><CheckCircle2 className="h-4 w-4" /> Sent</>) : (<>Send Request <ArrowRight className="h-4 w-4" /></>)}
             </button>
-            {sent && <p className="mt-4 text-sm text-[color:var(--sage)] font-semibold">Thanks! Your message will be sent once deployed on Netlify.</p>}
+            {status === "success" && (
+              <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[color:var(--sage)]/40 bg-[color:var(--sage)]/10 p-4">
+                <CheckCircle2 className="h-5 w-5 text-[color:var(--sage)] mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-[color:var(--ink)]">Thanks — your request was sent.</p>
+                  <p className="text-sm text-[color:var(--ink-soft)] mt-0.5">We typically respond the same day. For urgent jobs, call {PHONE_DISPLAY}.</p>
+                </div>
+              </div>
+            )}
+            {status === "error" && (
+              <div className="mt-5 flex items-start gap-3 rounded-2xl border border-red-300 bg-red-50 p-4">
+                <X className="h-5 w-5 text-red-600 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-red-800">Submission failed.</p>
+                  <p className="text-sm text-red-700/90 mt-0.5">{errorMsg}</p>
+                </div>
+              </div>
+            )}
           </form>
         </div>
+
       </div>
     </section>
   );
@@ -598,10 +659,19 @@ function Footer() {
           </div>
           <p className="mt-5 text-sm text-white/65 max-w-md leading-relaxed">Premium flooring, carpentry, and remodeling — crafted with precision across Southwest Florida.</p>
           <div className="mt-6 flex items-center gap-3">
-            <a href="#" aria-label="Facebook" className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
               <Facebook className="h-4 w-4" />
             </a>
+            <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" aria-label="Google reviews" className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+              <svg viewBox="0 0 48 48" className="h-4 w-4" aria-hidden="true">
+                <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/>
+                <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                <path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 14-5.4l-6.5-5.5C29.6 34.6 26.9 35.5 24 35.5c-5.3 0-9.7-3.4-11.3-8l-6.5 5C9.6 39.6 16.2 44 24 44z"/>
+                <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.5 5.5C41.9 35.5 44 30.1 44 24c0-1.3-.1-2.4-.4-3.5z"/>
+              </svg>
+            </a>
           </div>
+
         </div>
         <div>
           <div className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--wood)] font-semibold mb-5">Navigate</div>
