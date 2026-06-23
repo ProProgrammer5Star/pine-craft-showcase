@@ -515,8 +515,41 @@ function CtaBand() {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    setStatus("submitting");
+    setErrorMsg("");
+    try {
+      const data = new FormData(form);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        const json = await res.json().catch(() => null);
+        setErrorMsg(json?.errors?.[0]?.message || "Something went wrong. Please try again or call us directly.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+      setStatus("error");
+    }
+  };
+
   return (
+
     <section id="contact" className="py-24 md:py-36 bg-[color:var(--sand)]/40">
       <div className="mx-auto max-w-7xl px-5 md:px-10 grid lg:grid-cols-5 gap-12">
         <div className="lg:col-span-2">
