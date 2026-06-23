@@ -284,25 +284,25 @@ function BeforeAfter({ before, after, label }: { before: string; after: string; 
 }
 
 function Work() {
-  const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [photoIndex, setPhotoIndex] = useState(0);
-
-  const openProject = (i: number) => { setActiveProject(i); setPhotoIndex(0); };
-  const close = () => setActiveProject(null);
-
-  const current = activeProject !== null ? PROJECTS[activeProject] : null;
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const open = (i: number) => setLightboxIndex(i);
+  const close = () => setLightboxIndex(null);
+  const next = () => setLightboxIndex((i) => (i === null ? i : (i + 1) % GALLERY.length));
+  const prev = () => setLightboxIndex((i) => (i === null ? i : (i - 1 + GALLERY.length) % GALLERY.length));
 
   useEffect(() => {
-    if (activeProject === null) return;
+    if (lightboxIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
-      if (current && e.key === "ArrowRight") setPhotoIndex((i) => (i + 1) % current.photos.length);
-      if (current && e.key === "ArrowLeft") setPhotoIndex((i) => (i - 1 + current.photos.length) % current.photos.length);
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [activeProject, current]);
+  }, [lightboxIndex]);
+
+  const current = lightboxIndex !== null ? GALLERY[lightboxIndex] : null;
 
   return (
     <section id="work" className="py-24 md:py-36 bg-[color:var(--sand)]/40">
@@ -314,23 +314,41 @@ function Work() {
           <BeforeAfter before={before2} after={after2} label="Coastal Fireplace Build · Sarasota" />
         </div>
 
-        <div className="flex items-end justify-between mb-10">
+        <div className="flex items-end justify-between mb-4">
           <h3 className="font-display text-3xl md:text-4xl text-[color:var(--ink)]">Project Gallery</h3>
           <a href="#contact" className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--ink)] hover:text-[color:var(--wood-dark)] transition">
             Start your project <ArrowRight className="h-4 w-4" />
           </a>
         </div>
-        <p className="text-sm text-[color:var(--ink-soft)] mb-8 -mt-6">Click a stack to view the full project.</p>
+        <p className="text-sm text-[color:var(--ink-soft)] mb-10">Click any photo to view full-screen.</p>
 
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 pt-4">
-          {PROJECTS.map((p, i) => (
-            <ProjectStack key={p.id} project={p} onOpen={() => openProject(i)} />
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 md:gap-5 [column-fill:_balance]">
+          {GALLERY.map((g, i) => (
+            <button
+              key={g.src}
+              type="button"
+              onClick={() => open(i)}
+              className="group relative mb-4 md:mb-5 block w-full overflow-hidden rounded-2xl shadow-[var(--shadow-soft)] ring-1 ring-black/5 break-inside-avoid focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ink)]"
+              aria-label={`Open photo ${i + 1}: ${g.alt}`}
+            >
+              <img
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto object-cover transition-transform duration-[700ms] ease-out group-hover:scale-[1.04]"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4 text-white translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-300">
+                <div className="text-xs font-medium leading-snug line-clamp-2">{g.alt}</div>
+              </div>
+            </button>
           ))}
         </div>
       </div>
 
-      {current && (
-        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8" onClick={close}>
+      {current && lightboxIndex !== null && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-8 animate-fade-in" onClick={close}>
           <button
             onClick={(e) => { e.stopPropagation(); close(); }}
             className="absolute top-4 right-4 md:top-6 md:right-6 h-11 w-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
@@ -338,41 +356,32 @@ function Work() {
           >
             <X className="h-5 w-5" />
           </button>
-
           <button
-            onClick={(e) => { e.stopPropagation(); setPhotoIndex((i) => (i - 1 + current.photos.length) % current.photos.length); }}
+            onClick={(e) => { e.stopPropagation(); prev(); }}
             className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
             aria-label="Previous"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
-            onClick={(e) => { e.stopPropagation(); setPhotoIndex((i) => (i + 1) % current.photos.length); }}
+            onClick={(e) => { e.stopPropagation(); next(); }}
             className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
             aria-label="Next"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
 
-          <div className="max-w-5xl w-full flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
-            <div className="w-full max-h-[75vh] flex items-center justify-center">
-              <img src={current.photos[photoIndex]} alt={`${current.title} ${photoIndex + 1}`} className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg shadow-2xl" />
+          <div className="max-w-6xl w-full flex flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>
+            <div className="w-full max-h-[82vh] flex items-center justify-center">
+              <img
+                src={current.src}
+                alt={current.alt}
+                className="max-h-[82vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
+              />
             </div>
             <div className="text-center text-white">
-              <div className="text-xs uppercase tracking-[0.25em] text-white/60">{current.location}</div>
-              <h4 className="font-display text-xl md:text-2xl mt-1">{current.title}</h4>
-              <div className="text-sm text-white/70 mt-2">{photoIndex + 1} / {current.photos.length}</div>
-            </div>
-            <div className="flex gap-2 flex-wrap justify-center">
-              {current.photos.map((src, i) => (
-                <button
-                  key={src}
-                  onClick={() => setPhotoIndex(i)}
-                  className={`h-14 w-14 md:h-16 md:w-16 rounded-md overflow-hidden ring-2 transition ${i === photoIndex ? "ring-white" : "ring-transparent opacity-60 hover:opacity-100"}`}
-                >
-                  <img src={src} alt="" className="h-full w-full object-cover" />
-                </button>
-              ))}
+              <div className="text-sm text-white/85">{current.alt}</div>
+              <div className="text-xs text-white/55 mt-1">{lightboxIndex + 1} / {GALLERY.length}</div>
             </div>
           </div>
         </div>
@@ -381,43 +390,6 @@ function Work() {
   );
 }
 
-function ProjectStack({ project, onOpen }: { project: typeof PROJECTS[number]; onOpen: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="group text-left focus:outline-none"
-      aria-label={`Open ${project.title} project gallery`}
-    >
-      <div className="relative h-[360px] md:h-[460px] mb-6">
-        {/* Back card */}
-        <div className="absolute inset-0 rounded-2xl bg-[color:var(--sand)] shadow-lg rotate-[-4deg] translate-x-3 translate-y-3 transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:translate-x-5 group-hover:translate-y-5 overflow-hidden">
-          <img src={project.photos[2] ?? project.photos[0]} alt="" className="w-full h-full object-cover opacity-80" />
-        </div>
-        {/* Middle card */}
-        <div className="absolute inset-0 rounded-2xl bg-white shadow-xl rotate-[3deg] translate-x-1 translate-y-1 transition-transform duration-500 group-hover:rotate-[5deg] group-hover:translate-x-2 group-hover:translate-y-2 overflow-hidden">
-          <img src={project.photos[1] ?? project.photos[0]} alt="" className="w-full h-full object-cover opacity-90" />
-        </div>
-        {/* Front card */}
-        <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5 transition-transform duration-500 group-hover:-translate-y-2">
-          <img src={project.photos[0]} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          <div className="absolute top-4 right-4 bg-white/95 text-[color:var(--ink)] text-xs font-semibold px-3 py-1.5 rounded-full shadow">
-            {project.photos.length} photos
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 text-white">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-white/80">{project.location}</div>
-            <div className="font-display text-xl md:text-2xl mt-1">{project.title}</div>
-            <div className="mt-3 inline-flex items-center gap-2 text-sm font-semibold opacity-90 group-hover:opacity-100">
-              View project <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <p className="text-sm md:text-base text-[color:var(--ink-soft)] leading-relaxed">{project.description}</p>
-    </button>
-  );
-}
 
 function About() {
   return (
