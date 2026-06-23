@@ -581,20 +581,11 @@ function Contact() {
         </div>
         <div className="lg:col-span-3">
           <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            onSubmit={(e) => {
-              if (!window.location.hostname.includes("netlify")) {
-                e.preventDefault();
-                setSent(true);
-              }
-            }}
+            onSubmit={handleSubmit}
+            noValidate
             className="rounded-3xl bg-card border border-border p-7 md:p-12 shadow-[var(--shadow-soft)]"
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <p className="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+            <p className="hidden" aria-hidden="true"><label>Don't fill this out: <input name="_gotcha" tabIndex={-1} autoComplete="off" /></label></p>
             <div className="grid md:grid-cols-2 gap-5">
               <Field label="Name" name="name" required />
               <Field label="Phone" name="phone" type="tel" required />
@@ -612,12 +603,34 @@ function Contact() {
                 <textarea name="message" rows={5} required className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-[color:var(--ink)] focus:border-[color:var(--ink)]" />
               </div>
             </div>
-            <button type="submit" className="mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] hover:bg-[color:var(--ink-soft)] text-[color:var(--ivory)] px-8 py-4 text-sm font-semibold transition">
-              Send Request <ArrowRight className="h-4 w-4" />
+            <button
+              type="submit"
+              disabled={status === "submitting" || status === "success"}
+              className="mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] hover:bg-[color:var(--ink-soft)] text-[color:var(--ivory)] px-8 py-4 text-sm font-semibold transition disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {status === "submitting" ? (<><Loader2 className="h-4 w-4 animate-spin" /> Sending…</>) : status === "success" ? (<><CheckCircle2 className="h-4 w-4" /> Sent</>) : (<>Send Request <ArrowRight className="h-4 w-4" /></>)}
             </button>
-            {sent && <p className="mt-4 text-sm text-[color:var(--sage)] font-semibold">Thanks! Your message will be sent once deployed on Netlify.</p>}
+            {status === "success" && (
+              <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[color:var(--sage)]/40 bg-[color:var(--sage)]/10 p-4">
+                <CheckCircle2 className="h-5 w-5 text-[color:var(--sage)] mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-[color:var(--ink)]">Thanks — your request was sent.</p>
+                  <p className="text-sm text-[color:var(--ink-soft)] mt-0.5">We typically respond the same day. For urgent jobs, call {PHONE_DISPLAY}.</p>
+                </div>
+              </div>
+            )}
+            {status === "error" && (
+              <div className="mt-5 flex items-start gap-3 rounded-2xl border border-red-300 bg-red-50 p-4">
+                <X className="h-5 w-5 text-red-600 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-red-800">Submission failed.</p>
+                  <p className="text-sm text-red-700/90 mt-0.5">{errorMsg}</p>
+                </div>
+              </div>
+            )}
           </form>
         </div>
+
       </div>
     </section>
   );
