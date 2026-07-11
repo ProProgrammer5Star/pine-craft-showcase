@@ -69,6 +69,16 @@ const SERVICES = [
 ];
 
 const GALLERY: { src: string; alt: string }[] = [
+  { src: up1, alt: "Large-format porcelain shower with wood-look floor" },
+  { src: up2, alt: "Concrete-look porcelain shower stall with linear drain" },
+  { src: up3, alt: "Marble-veined bathroom with built-in bench" },
+  { src: up4, alt: "Grey marble step and platform detail" },
+  { src: up5, alt: "Grey stone-look tile shower surround" },
+  { src: up6, alt: "Wide plank wood-look tile floor install in progress" },
+  { src: up7, alt: "Chevron mosaic accent wall in marble bathroom" },
+  { src: up8, alt: "Book-matched taupe marble shower walls" },
+  { src: up9, alt: "Full marble bathroom in progress with crown molding" },
+  { src: up10, alt: "White marble steam shower with waterfall veining" },
   { src: pj1_1, alt: "Coastal stacked-stone fireplace build" },
   { src: pj2_1, alt: "Modern electric fireplace wall" },
   { src: g1, alt: "Luxury vinyl plank install in bedroom" },
@@ -79,6 +89,9 @@ const GALLERY: { src: string; alt: string }[] = [
   { src: g3, alt: "Wide plank flooring in open living room" },
   { src: g6, alt: "White shaker cabinetry detail" },
   { src: pj1_3, alt: "Fireplace cladding detail" },
+];
+
+const OTHER_PROJECTS: { src: string; alt: string }[] = [
   { src: g4, alt: "Penny tile bathroom floor install" },
   { src: g8, alt: "Ash plank hardwood floor install" },
   { src: pj2_4, alt: "Oak mantle and lit display niches" },
