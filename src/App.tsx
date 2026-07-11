@@ -84,17 +84,17 @@ const GALLERY: { src: string; alt: string }[] = [
   { src: g1, alt: "Luxury vinyl plank install in bedroom" },
   { src: g5, alt: "Custom white shaker kitchen with quartz island" },
   { src: pj1_2, alt: "Stacked stone fireplace surround in progress" },
-  { src: g2, alt: "Natural stone fireplace feature wall" },
-  { src: pj2_2, alt: "Built-in entertainment center with linear fireplace" },
-  { src: g3, alt: "Wide plank flooring in open living room" },
+  { src: g4, alt: "Penny tile bathroom floor install" },
+  { src: g8, alt: "Ash plank hardwood floor install" },
+  { src: pj2_4, alt: "Oak mantle and lit display niches" },
   { src: g6, alt: "White shaker cabinetry detail" },
   { src: pj1_3, alt: "Fireplace cladding detail" },
 ];
 
 const OTHER_PROJECTS: { src: string; alt: string }[] = [
-  { src: g4, alt: "Penny tile bathroom floor install" },
-  { src: g8, alt: "Ash plank hardwood floor install" },
-  { src: pj2_4, alt: "Oak mantle and lit display niches" },
+  { src: g2, alt: "Natural stone fireplace feature wall" },
+  { src: pj2_2, alt: "Built-in entertainment center with linear fireplace" },
+  { src: g3, alt: "Wide plank flooring in open living room" },
   { src: g9, alt: "Light oak luxury vinyl plank kitchen floor" },
   { src: pj1_5, alt: "Marble fireplace surround detail" },
   { src: g7, alt: "Shaker interior doors install" },
@@ -103,6 +103,7 @@ const OTHER_PROJECTS: { src: string; alt: string }[] = [
   { src: pj1_6, alt: "Finished coastal stacked-stone fireplace" },
   { src: pj2_6, alt: "Modern fireplace wall finished" },
 ];
+
 
 const REVIEWS = [
   {
