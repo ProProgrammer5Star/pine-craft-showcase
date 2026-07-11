@@ -31,6 +31,16 @@ import g7 from "@/assets/gallery/new_7.jpg";
 import g8 from "@/assets/gallery/new_8.jpg";
 import g9 from "@/assets/gallery/new_9.jpg";
 import g10 from "@/assets/gallery/new_10.jpg";
+import up1 from "@/assets/gallery/up_1.jpg";
+import up2 from "@/assets/gallery/up_2.jpg";
+import up3 from "@/assets/gallery/up_3.jpg";
+import up4 from "@/assets/gallery/up_4.jpg";
+import up5 from "@/assets/gallery/up_5.jpg";
+import up6 from "@/assets/gallery/up_6.jpg";
+import up7 from "@/assets/gallery/up_7.jpg";
+import up8 from "@/assets/gallery/up_8.jpg";
+import up9 from "@/assets/gallery/up_9.jpg";
+import up10 from "@/assets/gallery/up_10.jpg";
 
 const PHONE_DISPLAY = "(941) 301-9649";
 const PHONE_HREF = "tel:+19413019649";
@@ -59,6 +69,16 @@ const SERVICES = [
 ];
 
 const GALLERY: { src: string; alt: string }[] = [
+  { src: up1, alt: "Large-format porcelain shower with wood-look floor" },
+  { src: up2, alt: "Concrete-look porcelain shower stall with linear drain" },
+  { src: up3, alt: "Marble-veined bathroom with built-in bench" },
+  { src: up4, alt: "Grey marble step and platform detail" },
+  { src: up5, alt: "Grey stone-look tile shower surround" },
+  { src: up6, alt: "Wide plank wood-look tile floor install in progress" },
+  { src: up7, alt: "Chevron mosaic accent wall in marble bathroom" },
+  { src: up8, alt: "Book-matched taupe marble shower walls" },
+  { src: up9, alt: "Full marble bathroom in progress with crown molding" },
+  { src: up10, alt: "White marble steam shower with waterfall veining" },
   { src: pj1_1, alt: "Coastal stacked-stone fireplace build" },
   { src: pj2_1, alt: "Modern electric fireplace wall" },
   { src: g1, alt: "Luxury vinyl plank install in bedroom" },
@@ -69,6 +89,9 @@ const GALLERY: { src: string; alt: string }[] = [
   { src: g3, alt: "Wide plank flooring in open living room" },
   { src: g6, alt: "White shaker cabinetry detail" },
   { src: pj1_3, alt: "Fireplace cladding detail" },
+];
+
+const OTHER_PROJECTS: { src: string; alt: string }[] = [
   { src: g4, alt: "Penny tile bathroom floor install" },
   { src: g8, alt: "Ash plank hardwood floor install" },
   { src: pj2_4, alt: "Oak mantle and lit display niches" },
@@ -310,25 +333,51 @@ function BeforeAfter({ before, after, label }: { before: string; after: string; 
 }
 
 function Work() {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const open = (i: number) => setLightboxIndex(i);
-  const close = () => setLightboxIndex(null);
-  const next = () => setLightboxIndex((i) => (i === null ? i : (i + 1) % GALLERY.length));
-  const prev = () => setLightboxIndex((i) => (i === null ? i : (i - 1 + GALLERY.length) % GALLERY.length));
+  const [lightbox, setLightbox] = useState<{ list: { src: string; alt: string }[]; index: number } | null>(null);
+  const [showOther, setShowOther] = useState(false);
+
+  const openLightbox = (list: { src: string; alt: string }[], index: number) => setLightbox({ list, index });
+  const closeLightbox = () => setLightbox(null);
+  const next = () => setLightbox((s) => (s ? { ...s, index: (s.index + 1) % s.list.length } : s));
+  const prev = () => setLightbox((s) => (s ? { ...s, index: (s.index - 1 + s.list.length) % s.list.length } : s));
 
   useEffect(() => {
-    if (lightboxIndex === null) return;
+    if (!lightbox && !showOther) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
+      if (e.key === "Escape") { if (lightbox) closeLightbox(); else setShowOther(false); }
+      if (lightbox) {
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      }
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [lightboxIndex]);
+  }, [lightbox, showOther]);
 
-  const current = lightboxIndex !== null ? GALLERY[lightboxIndex] : null;
+  const current = lightbox ? lightbox.list[lightbox.index] : null;
+
+  const renderTile = (list: { src: string; alt: string }[], g: { src: string; alt: string }, i: number) => (
+    <button
+      key={g.src}
+      type="button"
+      onClick={() => openLightbox(list, i)}
+      className="group relative mb-3 md:mb-5 block w-full overflow-hidden rounded-xl md:rounded-2xl shadow-[var(--shadow-soft)] ring-1 ring-black/5 break-inside-avoid focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ink)]"
+      aria-label={`Open photo ${i + 1}: ${g.alt}`}
+    >
+      <img
+        src={g.src}
+        alt={g.alt}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-auto object-cover transition-transform duration-[700ms] ease-out group-hover:scale-[1.04]"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-300">
+        <div className="text-[11px] md:text-xs font-medium leading-snug line-clamp-2">{g.alt}</div>
+      </div>
+    </button>
+  );
 
   return (
     <section id="work" className="py-24 md:py-36 bg-[color:var(--sand)]/40">
@@ -346,37 +395,52 @@ function Work() {
             Start your project <ArrowRight className="h-4 w-4" />
           </a>
         </div>
-        <p className="text-sm text-[color:var(--ink-soft)] mb-10">Click any photo to view full-screen.</p>
+        <p className="text-sm text-[color:var(--ink-soft)] mb-8 md:mb-10">Click any photo to view full-screen.</p>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 md:gap-5 [column-fill:_balance]">
-          {GALLERY.map((g, i) => (
-            <button
-              key={g.src}
-              type="button"
-              onClick={() => open(i)}
-              className="group relative mb-4 md:mb-5 block w-full overflow-hidden rounded-2xl shadow-[var(--shadow-soft)] ring-1 ring-black/5 break-inside-avoid focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ink)]"
-              aria-label={`Open photo ${i + 1}: ${g.alt}`}
-            >
-              <img
-                src={g.src}
-                alt={g.alt}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-auto object-cover transition-transform duration-[700ms] ease-out group-hover:scale-[1.04]"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4 text-white translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-300">
-                <div className="text-xs font-medium leading-snug line-clamp-2">{g.alt}</div>
-              </div>
-            </button>
-          ))}
+        <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 md:gap-5 [column-fill:_balance]">
+          {GALLERY.map((g, i) => renderTile(GALLERY, g, i))}
+        </div>
+
+        <div className="mt-12 md:mt-16 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowOther(true)}
+            className="inline-flex items-center gap-2 rounded-full bg-[color:var(--ink)] text-[color:var(--ivory)] px-7 py-3.5 text-sm font-semibold tracking-wide hover:bg-[color:var(--wood-dark)] transition shadow-[var(--shadow-soft)]"
+          >
+            View Other Projects <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
 
-      {current && lightboxIndex !== null && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-8 animate-fade-in" onClick={close}>
+      {showOther && (
+        <div className="fixed inset-0 z-[90] bg-[color:var(--ivory)] overflow-y-auto animate-fade-in">
+          <div className="sticky top-0 z-10 bg-[color:var(--ivory)]/90 backdrop-blur border-b border-black/5">
+            <div className="mx-auto max-w-7xl px-5 md:px-10 py-4 flex items-center justify-between">
+              <div>
+                <div className="text-[11px] uppercase tracking-[0.2em] text-[color:var(--ink-soft)]">Archive</div>
+                <h3 className="font-display text-2xl md:text-3xl text-[color:var(--ink)]">Other Projects</h3>
+              </div>
+              <button
+                onClick={() => setShowOther(false)}
+                className="h-10 w-10 rounded-full bg-[color:var(--ink)] text-white hover:bg-[color:var(--wood-dark)] flex items-center justify-center transition"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+          <div className="mx-auto max-w-7xl px-5 md:px-10 py-8 md:py-12">
+            <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 md:gap-5 [column-fill:_balance]">
+              {OTHER_PROJECTS.map((g, i) => renderTile(OTHER_PROJECTS, g, i))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {current && lightbox && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-8 animate-fade-in" onClick={closeLightbox}>
           <button
-            onClick={(e) => { e.stopPropagation(); close(); }}
+            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
             className="absolute top-4 right-4 md:top-6 md:right-6 h-11 w-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
             aria-label="Close"
           >
@@ -407,7 +471,7 @@ function Work() {
             </div>
             <div className="text-center text-white">
               <div className="text-sm text-white/85">{current.alt}</div>
-              <div className="text-xs text-white/55 mt-1">{lightboxIndex + 1} / {GALLERY.length}</div>
+              <div className="text-xs text-white/55 mt-1">{lightbox.index + 1} / {lightbox.list.length}</div>
             </div>
           </div>
         </div>
