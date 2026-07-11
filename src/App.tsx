@@ -31,6 +31,16 @@ import g7 from "@/assets/gallery/new_7.jpg";
 import g8 from "@/assets/gallery/new_8.jpg";
 import g9 from "@/assets/gallery/new_9.jpg";
 import g10 from "@/assets/gallery/new_10.jpg";
+import up1 from "@/assets/gallery/up_1.jpg";
+import up2 from "@/assets/gallery/up_2.jpg";
+import up3 from "@/assets/gallery/up_3.jpg";
+import up4 from "@/assets/gallery/up_4.jpg";
+import up5 from "@/assets/gallery/up_5.jpg";
+import up6 from "@/assets/gallery/up_6.jpg";
+import up7 from "@/assets/gallery/up_7.jpg";
+import up8 from "@/assets/gallery/up_8.jpg";
+import up9 from "@/assets/gallery/up_9.jpg";
+import up10 from "@/assets/gallery/up_10.jpg";
 
 const PHONE_DISPLAY = "(941) 301-9649";
 const PHONE_HREF = "tel:+19413019649";
